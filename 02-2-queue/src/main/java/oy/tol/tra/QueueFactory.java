@@ -15,7 +15,8 @@ public class QueueFactory {
     * @param capacity Number of elements the queue can hold.
     * @return The queue object.
     */
-   public static QueueInterface<Integer> createIntegerQueue(int capacity) {
+    public static QueueInterface<Integer> createIntegerQueue(int capacity) {
+      return null;
       // TODO: Implement this when you have finished your QueueImplementation.
       // - Instantiates your queue implementation using Integer as template parameter, 
       //   with the given capacity,
