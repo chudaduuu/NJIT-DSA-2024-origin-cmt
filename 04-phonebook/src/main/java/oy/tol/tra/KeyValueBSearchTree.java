@@ -56,7 +56,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>, V> implements Dictiona
         // so do not just replace it with this new node but set
         // the keys and values for the already existing root.
         if (key == null || value == null)
-            throw new IllegalArgumentException("Key or value cannot be null.");
+            throw new IllegalArgumentException("Key and value cannot be null!");
 
         TreeNode<K, V> newNode = new TreeNode<>(key, value);
 
@@ -100,7 +100,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>, V> implements Dictiona
     @Override
     public V find(K key) throws IllegalArgumentException {
         if (key == null)
-            throw new IllegalArgumentException("Key cannot be null.");
+            throw new IllegalArgumentException("Key cannot be null!");
 
         TreeNode<K, V> currentNode = root;
 
