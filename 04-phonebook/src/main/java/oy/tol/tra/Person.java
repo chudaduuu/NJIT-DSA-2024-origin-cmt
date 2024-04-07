@@ -42,7 +42,7 @@ public class Person implements Comparable<Person> {
         int hash = 5381;
         String fullName = firstName + lastName;
         for (int i = 0; i < fullName.length(); i++) {
-            hash = (hash * 31 + fullName.charAt(i)) % Integer.MAX_VALUE;
+            hash = (hash * 31 + fullName.charAt(i));
         }
         return hash;
     }

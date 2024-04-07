@@ -48,6 +48,33 @@ public class ParenthesisChecker {
     * @throws StackAllocationException If the stack cannot be allocated or reallocated if necessary.
     */
     public static int checkParentheses(StackInterface<Character> stack, String fromString) throws ParenthesesException {
+        int number=0;
+        for (int i = 0; i < fromString.length(); i++) {
+            char character = fromString.charAt(i);
+            if (character == '(' || character == '[' || character == '{') {
+                if(stack==null){
+                    throw new ParenthesesException("stack failure", ParenthesesException.STACK_FAILURE);
+                }
+                stack.push(character);
+                number++;
+            } else if (character == ')' || character == ']' || character == '}') {
+                if(stack.isEmpty()){
+                    throw new ParenthesesException("Too many closing parentheses.",ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
+                }
+                Character character_pop = stack.pop();
+                number++;
+                if ((character == ')' && character_pop != '(') ||
+                        (character == ']' && character_pop != '[') ||
+                        (character == '}' && character_pop != '{')) {
+                    throw new ParenthesesException("Mismatched parentheses.",ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
+                }
+            }
+        }
+        if (!stack.isEmpty()) {
+            throw new ParenthesesException("Too many opening parentheses.",ParenthesesException.STACK_FAILURE);
+        }
+
+        return number;
       // TODO:
       // for each character in the input string
       //   if character is an opening parenthesis -- one of "([{"

@@ -65,58 +65,19 @@ public class KeyValueBSearchTree<K extends Comparable<K>, V> implements Dictiona
             count++;
             return true;
         } else {
-            if (insertNode(root, newNode)) {
+            if(root.insert(key,value,key.hashCode())==1){
                 count++;
-                return true;
-            } else {
-                return false;
             }
+            return true;
         }
     }
 
-    private boolean insertNode(TreeNode<K, V> currentNode, TreeNode<K, V> newNode) {
-        int cmp = newNode.keyValue.getKey().compareTo(currentNode.keyValue.getKey());
-
-        if (cmp < 0) {
-            if (currentNode.left == null) {
-                currentNode.left = newNode;
-                return true;
-            } else {
-                return insertNode(currentNode.left, newNode);
-            }
-        } else if (cmp > 0) {
-            if (currentNode.right == null) {
-                currentNode.right = newNode;
-                return true;
-            } else {
-                return insertNode(currentNode.right, newNode);
-            }
-        } else {
-            currentNode.keyValue.setValue(newNode.keyValue.getValue());
-            return false;
-        }
-    }
 
     @Override
     public V find(K key) throws IllegalArgumentException {
         if (key == null)
             throw new IllegalArgumentException("Key cannot be null!");
-
-        TreeNode<K, V> currentNode = root;
-
-        while (currentNode != null) {
-            int cmp = key.compareTo(currentNode.keyValue.getKey());
-
-            if (cmp < 0) {
-                currentNode = currentNode.left;
-            } else if (cmp > 0) {
-                currentNode = currentNode.right;
-            } else {
-                return currentNode.keyValue.getValue();
-            }
-        }
-
-        return null;
+        return root.find(key,key.hashCode());
     }
 
     @Override
